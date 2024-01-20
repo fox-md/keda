@@ -179,6 +179,8 @@ func buildScaler(ctx context.Context, client client.Client, triggerType string, 
 		return scalers.NewExternalMockScaler(config)
 	case "external-push":
 		return scalers.NewExternalPushScaler(config)
+	case "fox":
+		return scalers.NewFoxScaler(config)
 	case "gcp-cloudtasks":
 		return scalers.NewGcpCloudTasksScaler(config)
 	case "gcp-pubsub":
