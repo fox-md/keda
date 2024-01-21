@@ -35,9 +35,7 @@ type foxMetadata struct {
 }
 
 type foxResponse struct {
-	Response struct {
-		Result int `json:"result"`
-	} `json:"response"`
+	Result int `json:"result"`
 }
 
 // NewSolrScaler creates a new solr Scaler
@@ -141,8 +139,8 @@ func (s *foxScaler) getItemCount(ctx context.Context) (float64, error) {
 		return -1, fmt.Errorf("%w, make sure you enter username, password and collection values correctly in the yaml file", err)
 	}
 
-	s.logger.Info("FoxScaler result response = ", foxResponse1.Response.Result)
-	itemCount = float64(foxResponse1.Response.Result)
+	s.logger.Info("FoxScaler result response = ", itemCount)
+	itemCount = float64(foxResponse1.Result)
 	return itemCount, nil
 }
 
@@ -168,7 +166,8 @@ func (s *foxScaler) GetMetricsAndActivity(ctx context.Context, metricName string
 	}
 
 	metric := GenerateMetricInMili(metricName, result)
-	s.logger.Info("FoxScaler GetMetricsAndActivity = ", result > s.metadata.activationTargetQueryValue)
+	boolReturnValue := result > s.metadata.activationTargetQueryValue
+	s.logger.Info("FoxScaler GetMetricsAndActivity = ", boolReturnValue)
 
 	return append([]external_metrics.ExternalMetricValue{}, metric), result > s.metadata.activationTargetQueryValue, nil
 }
