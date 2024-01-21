@@ -139,8 +139,8 @@ func (s *foxScaler) getItemCount(ctx context.Context) (float64, error) {
 		return -1, fmt.Errorf("%w, make sure you enter username, password and collection values correctly in the yaml file", err)
 	}
 
-	s.logger.Info("FoxScaler result response = ", itemCount)
 	itemCount = float64(foxResponse1.Result)
+	s.logger.Info("FoxScaler result response = ", itemCount)
 	return itemCount, nil
 }
 
