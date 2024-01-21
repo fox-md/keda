@@ -140,7 +140,7 @@ func (s *foxScaler) getItemCount(ctx context.Context) (float64, error) {
 	}
 
 	itemCount = float64(foxResponse1.Result)
-	s.logger.Info("FoxScaler result response = ", itemCount)
+	s.logger.Info("FoxScaler result response = ", itemCount, "")
 	return itemCount, nil
 }
 
@@ -167,7 +167,7 @@ func (s *foxScaler) GetMetricsAndActivity(ctx context.Context, metricName string
 
 	metric := GenerateMetricInMili(metricName, result)
 	boolReturnValue := result > s.metadata.activationTargetQueryValue
-	s.logger.Info("FoxScaler GetMetricsAndActivity = ", boolReturnValue)
+	s.logger.Info("FoxScaler GetMetricsAndActivity = ", boolReturnValue, "")
 
 	return append([]external_metrics.ExternalMetricValue{}, metric), result > s.metadata.activationTargetQueryValue, nil
 }
