@@ -1,5 +1,8 @@
 # Build the manager binary
-FROM --platform=$BUILDPLATFORM ghcr.io/kedacore/keda-tools:1.21.6 AS builder
+#FROM --platform=$BUILDPLATFORM ghcr.io/kedacore/keda-tools:1.21.6 AS builder
+FROM golang:1.21.6 AS builder
+
+RUN apt-get update && apt-get -y install protobuf-compiler
 
 ARG BUILD_VERSION=main
 ARG GIT_COMMIT=HEAD

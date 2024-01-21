@@ -140,6 +140,8 @@ func (s *foxScaler) getItemCount(ctx context.Context) (float64, error) {
 	if err != nil {
 		return -1, fmt.Errorf("%w, make sure you enter username, password and collection values correctly in the yaml file", err)
 	}
+
+	s.logger.Info("FoxScaler result response = ", foxResponse1.Response.Result)
 	itemCount = float64(foxResponse1.Response.Result)
 	return itemCount, nil
 }
@@ -166,6 +168,7 @@ func (s *foxScaler) GetMetricsAndActivity(ctx context.Context, metricName string
 	}
 
 	metric := GenerateMetricInMili(metricName, result)
+	s.logger.Info("FoxScaler GetMetricsAndActivity = ", result > s.metadata.activationTargetQueryValue)
 
 	return append([]external_metrics.ExternalMetricValue{}, metric), result > s.metadata.activationTargetQueryValue, nil
 }
